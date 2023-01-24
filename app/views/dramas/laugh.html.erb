@@ -1,0 +1,9 @@
+<h1>笑えるドラマ</h1>
+<% @dramas.each do |t| %>
+    <% if t.emotion == "笑える" %> 
+        <%= t.title %>
+        <%= t.emotion %>
+        <%= t.highlight %>
+    <% end %>
+<% end %>
+<%= link_to "Drama一覧に戻る", dramas_path %>

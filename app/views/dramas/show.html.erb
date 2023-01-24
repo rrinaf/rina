@@ -1,0 +1,33 @@
+<h1>SelectDrama</h1>
+<h3>Drama詳細</h3>
+<div class="drama">
+  <p><%= @drama.title %></p>
+  <p><%= @drama.emotion %></p>
+  <p><%= @drama.highlight %></p> 
+  <p><%= @drama.recommendation %></p>
+  <% if user_signed_in? %>
+    <% if current_user.already_gooded?(@drama) %>
+    <%= button_to drama_good_path(id: @drama.id, drama_id: @drama.id), method: :delete do %>
+      <i class="fas fa-heart"></i><%= @drama.goods.count %>
+      <% end %>
+    <% else %>
+      <%= button_to drama_goods_path(@drama), method: :post do %>
+        <i class="far fa-heart"></i><%= @drama.goods.count %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <i class="far fa-heart"></i><%= @drama.goods.count %>
+  <% end %>
+<%= link_to "編集する", edit_drama_path(@drama.id) %>
+</div>
+
+<h2>いいねしたユーザー</h2>
+<% @drama.gooded_users.each do |user| %>
+<li><%= user.email %></li>
+<% end %>
+
+
+
+
+<%= link_to "Drama一覧に戻る", dramas_path %>
+<%= link_to "編集する", edit_drama_path(@drama.id) %>

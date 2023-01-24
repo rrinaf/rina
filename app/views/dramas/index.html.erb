@@ -1,0 +1,64 @@
+
+<div class="layer">
+  <img src="AdobeStock_300767847" alt="" class="layer-img">
+  <p class="center">～気分でドラマを選ぼう～</p>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Kaisei+Decol:wght@500&family=Merriweather:ital@1&display=swap" rel="stylesheet">
+</div>
+
+
+
+<h3>投稿を検索</h3>
+ <%= form_tag({controller:"dramas",action:"index"}, method: :get) do %>
+   <%= text_field_tag :search %>
+   <%= submit_tag '検索する'  %>
+<% end %>
+
+<h3>Drama一覧ページ</h3>
+
+<%= link_to "楽しい", dramas_enjoy_path %>
+<%= link_to "悲しい", dramas_sad_path %>
+<%= link_to "ドキドキしたい", dramas_heartthrob_path %>
+<%= link_to "ハラハラしたい", dramas_breathtaking_path %>
+<%= link_to "笑いたい", dramas_laugh_path %>
+
+
+
+<%= link_to "新規投稿へ", new_drama_path %>
+
+<%= page_entries_info @dramas %>
+
+<% if user_signed_in? %>
+  <%= link_to "マイページへ", user_path(current_user.id) %>
+<% end %>
+
+<div class="dramas-container">
+  <% @dramas.each do |t| %>
+    <div class="drama">
+
+    <% if user_signed_in? %>
+      <% if current_user.already_gooded?(t) %>
+          <%= button_to drama_good_path(id: t.id, drama_id: t.id), method: :delete do %>
+            <i class="fas fa-heart"></i><%= t.goods.count %>
+          <% end %>
+      <% else %>
+          <%= button_to drama_goods_path(id: t.id, drama_id: t.id) do %>
+            <i class="far fa-heart"></i><%= t.goods.count %>
+          <% end %>
+      <% end %>
+    <% else %>
+     <i class="far fa-heart"></i><%= t.goods.count %>
+    <% end %>
+      <%= t.title %>
+      <%= t.emotion %>
+      <%= t.highlight %>
+      <%= t.recommendation %>
+      <%= link_to "詳細へ", drama_path(t.id) %>
+      <%= link_to "編集する", edit_drama_path(t.id) %>
+      <%= button_to "削除する", drama_path(t.id), method: :delete %> 
+    </div>
+  <% end %>
+</div>
+
+<%= paginate @dramas %>

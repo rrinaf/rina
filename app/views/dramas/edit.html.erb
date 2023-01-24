@@ -1,0 +1,23 @@
+<%= form_for @dramas do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title, :size => 30 %>
+
+    <%= f.label :emotion %>
+    <%= f.select :emotion, 
+    [["楽しい", "楽しい"], 
+    ["悲しい", "悲しい"], 
+    ["ドキドキ", "ドキドキ"],
+    ["ハラハラ", "ハラハラ"],
+    ["笑える", "笑える"]], include_blank: "選択して下さい" %>
+
+
+    <%= f.label :highlight %>
+    <%= f.text_field :highlight, :size => 30 %>
+
+
+    <%= f.label :recommendation  %>
+    <%= f.number_field :recommendation, :size => 10 %>
+
+
+    <%= f.submit "編集する" %>
+  <% end %>

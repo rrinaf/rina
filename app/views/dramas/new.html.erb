@@ -1,0 +1,38 @@
+<h3>新規投稿ページ</h3>
+<%= form_for @drama do |f| %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, :size => 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :emotion %>
+    <%= f.select :emotion, 
+    [["楽しい", "楽しい"], 
+    ["悲しい", "悲しい"], 
+    ["ドキドキ", "ドキドキ"],
+    ["ハラハラ", "ハラハラ"],
+    ["笑える", "笑える"]], include_blank: "選択して下さい" %>
+  </div>
+
+  # データ型がstringで自由記述の入力フォーム
+<div class="field">
+<%= f.label :highlight %>
+<%= f.text_field :highlight, :size => 30 %>
+</div>
+
+
+# データ型がintegerで数字のみを入力するフォーム
+<div class="field">
+<%= f.label :recommendation  %>
+<%= f.number_field :recommendation, :size => 10 %>
+</div>
+
+  <%= f.submit "Dramaを投稿する" %>
+<% end %>
+
+
+
+
+<%= link_to "Drama一覧に戻る", dramas_path %>
