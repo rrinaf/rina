@@ -8,13 +8,15 @@
     padding: 0;
     text-align: center;
     /* ボックスサイズ指定 */
-    width: 100%;
+    width: 70%;
     height: 500px;
     position: relative;
 
   }
-  
-  .center {
+.layer p{
+  width: 70%;
+
+}  .center {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -30,5 +32,11 @@
     font-family: 'DotGothic16', sans-serif;
     font-family: 'Kaisei Decol', serif;
     font-family: 'Merriweather', serif;
+  }
+
+  .layer1{
+    background-color: #F2EFEB;
+
+ 
   }
   
